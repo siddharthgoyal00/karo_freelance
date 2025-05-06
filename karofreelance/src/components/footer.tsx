@@ -10,8 +10,8 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div className="md:col-span-2">
             <h3 className="font-bold text-2xl mb-4 flex items-center">
-              <span className="text-primary mr-1">Talent</span>
-              <span>Hub</span>
+              <span className="text-primary mr-1">karo</span>
+              <span>Freelance</span>
             </h3>
             <p className="text-gray-400 mb-6">
               Connecting talented freelancers with amazing clients worldwide. Our platform makes it easy to find work,
@@ -38,7 +38,7 @@ export function Footer() {
             <div className="space-y-2">
               <div className="flex items-center text-gray-400">
                 <Mail className="h-4 w-4 mr-2" />
-                <span>contact@talenthub.com</span>
+                <span>contact@karofreelance.com</span>
               </div>
               <div className="flex items-center text-gray-400">
                 <Phone className="h-4 w-4 mr-2" />
@@ -128,7 +128,7 @@ export function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-gray-400 mb-4 md:mb-0">
-            © {new Date().getFullYear()} TalentHub. All rights reserved.
+            © {new Date().getFullYear()} karoFreelance. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <Link href="/privacy" className="text-sm text-gray-400 hover:text-primary transition-colors">
