@@ -37,7 +37,7 @@ export default function HomePage() {
             </h1>
             <p className="text-lg md:text-xl text-gray-300 mb-8">
               Whether you're looking to hire skilled professionals or find your
-              next gig, TalentHub connects you with opportunities that match
+              next gig, KaroFreelance connects you with opportunities that match
               your skills and requirements.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -84,7 +84,7 @@ export default function HomePage() {
             <Badge className="mb-4 bg-primary/10 text-primary border-primary/10 py-1 px-3 text-sm">
               Platform Features
             </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose TalentHub</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why ChooseKaroFreelance</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Our platform offers powerful tools and features to make freelancing and hiring seamless and efficient.
             </p>
@@ -137,7 +137,7 @@ export default function HomePage() {
             <Badge className="mb-4 bg-primary/10 text-primary border-primary/10 py-1 px-3 text-sm">
               Simple Process
             </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">How TalentHub Works</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">How KaroFreelance Works</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Our streamlined process makes it easy to get started, whether you're hiring or looking for work.
             </p>
