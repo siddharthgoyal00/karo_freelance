@@ -4,7 +4,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
-import { FloatingNav } from "@/components/floating-nav"
+import { TopNav } from "@/components/top-nav"
 import { Footer } from "@/components/footer"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -24,8 +24,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <FloatingNav />
-          <main className="min-h-screen">{children}</main>
+          <TopNav />
+          <main className="min-h-screen pt-16">{children}</main>
           <Footer />
           <Toaster />
         </ThemeProvider>

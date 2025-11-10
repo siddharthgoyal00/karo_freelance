@@ -15,20 +15,37 @@ export default function SignInPage() {
   const { toast } = useToast()
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleSignIn = (userType: "client" | "freelancer") => {
+  const handleSignIn = async (e: React.FormEvent<HTMLFormElement>, userType: "client" | "freelancer") => {
+    e.preventDefault()
     setIsLoading(true)
 
-    // Simulate authentication
-    setTimeout(() => {
-      setIsLoading(false)
+    try {
+      const form = new FormData(e.currentTarget)
+      const email = String(form.get(`${userType}-email`) || "")
+      const password = String(form.get(`${userType}-password`) || "")
+
+      const res = await fetch("/api/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      })
+
+      const data = await res.json()
+      if (!res.ok) throw new Error(data?.error || "Failed to sign in")
+
       toast({
         title: "Signed in successfully",
         description: `Welcome back to FreelanceHub as a ${userType}.`,
       })
-
-      // Redirect to the appropriate dashboard
       router.push(`/${userType}/dashboard`)
-    }, 1500)
+    } catch (err: any) {
+      toast({
+        title: "Sign in failed",
+        description: err.message || "Please check your credentials and try again.",
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -47,15 +64,12 @@ export default function SignInPage() {
 
             <TabsContent value="client">
               <form
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  handleSignIn("client")
-                }}
+                onSubmit={(e) => handleSignIn(e, "client")}
               >
                 <div className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="client-email">Email</Label>
-                    <Input id="client-email" type="email" placeholder="john@example.com" required />
+                    <Input id="client-email" name="client-email" type="email" placeholder="john@example.com" required />
                   </div>
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
@@ -67,7 +81,7 @@ export default function SignInPage() {
                         Forgot password?
                       </Link>
                     </div>
-                    <Input id="client-password" type="password" required />
+                    <Input id="client-password" name="client-password" type="password" required />
                   </div>
                   <Button type="submit" className="w-full" disabled={isLoading}>
                     {isLoading ? "Signing in..." : "Sign in as Client"}
@@ -86,15 +100,12 @@ export default function SignInPage() {
 
             <TabsContent value="freelancer">
               <form
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  handleSignIn("freelancer")
-                }}
+                onSubmit={(e) => handleSignIn(e, "freelancer")}
               >
                 <div className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="freelancer-email">Email</Label>
-                    <Input id="freelancer-email" type="email" placeholder="jane@example.com" required />
+                    <Input id="freelancer-email" name="freelancer-email" type="email" placeholder="jane@example.com" required />
                   </div>
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
@@ -106,7 +117,7 @@ export default function SignInPage() {
                         Forgot password?
                       </Link>
                     </div>
-                    <Input id="freelancer-password" type="password" required />
+                    <Input id="freelancer-password" name="freelancer-password" type="password" required />
                   </div>
                   <Button type="submit" className="w-full" disabled={isLoading}>
                     {isLoading ? "Signing in..." : "Sign in as Freelancer"}

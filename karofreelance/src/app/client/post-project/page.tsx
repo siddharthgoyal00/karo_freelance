@@ -36,7 +36,7 @@ export default function PostProject() {
 
   return (
     <DashboardSidebar userType="client">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6">
         <h1 className="text-3xl font-bold mb-6">Post a New Project</h1>
         <p className="text-muted-foreground mb-8">
           Fill out the form below to post your project and start receiving proposals from freelancers.

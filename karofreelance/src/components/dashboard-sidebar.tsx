@@ -14,6 +14,7 @@ import {
   SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
+  SidebarInset,
 } from "@/components/ui/sidebar"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
@@ -164,14 +165,14 @@ export function DashboardSidebar({ userType, children }: DashboardSidebarProps) 
   return (
     <SidebarProvider>
       <div className="flex min-h-screen">
-        <Sidebar variant="inset" collapsible="icon" className="bg-black text-white">
+        <Sidebar variant="inset" collapsible="offcanvas" className="bg-sidebar text-sidebar-foreground">
           <SidebarHeader className="flex flex-col items-center justify-center p-4 border-b border-gray-800">
             <Avatar className="h-16 w-16 mb-2 border-2 border-primary">
               <AvatarImage src={`/placeholder.svg?height=64&width=64`} alt={userName} />
               <AvatarFallback className="bg-primary/10 text-primary">{userInitials}</AvatarFallback>
             </Avatar>
             <div className="text-center">
-              <h3 className="font-medium text-white">{userName}</h3>
+              <h3 className="font-medium text-foreground">{userName}</h3>
               <p className="text-xs text-gray-400">{userRole}</p>
               {userType === "freelancer" && (
                 <div className="mt-2">
@@ -227,31 +228,13 @@ export function DashboardSidebar({ userType, children }: DashboardSidebarProps) 
             </Button>
           </SidebarFooter>
         </Sidebar>
-        <div className="flex-1 flex flex-col bg-gray-50 dark:bg-gray-900">
-          <div className="flex items-center justify-between p-4 border-b bg-white dark:bg-gray-800 shadow-sm">
-            <div className="flex items-center">
-              <SidebarTrigger className="mr-4" />
-              <h1 className="text-xl font-bold">
-                {userType === "client" ? "Client Dashboard" : "Freelancer Dashboard"}
-              </h1>
+        <SidebarInset className="bg-gray-50 dark:bg-gray-900 md:pl-64 md:peer-data-[collapsible=offcanvas]:pl-0">
+          <main className="flex-1 p-6 overflow-auto pt-16">
+            <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+              {children}
             </div>
-            <div className="flex items-center gap-3">
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-white">
-                  3
-                </span>
-              </Button>
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <Avatar className="h-8 w-8">
-                  <AvatarImage src={`/placeholder.svg?height=32&width=32`} alt={userName} />
-                  <AvatarFallback className="bg-primary/10 text-primary">{userInitials}</AvatarFallback>
-                </Avatar>
-              </Button>
-            </div>
-          </div>
-          <main className="flex-1 p-6 overflow-auto">{children}</main>
-        </div>
+          </main>
+        </SidebarInset>
       </div>
     </SidebarProvider>
   )

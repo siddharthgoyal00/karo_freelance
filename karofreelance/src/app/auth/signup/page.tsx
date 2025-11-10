@@ -18,20 +18,54 @@ export default function SignUpPage() {
   const { toast } = useToast()
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleSignUp = (userType: "client" | "freelancer") => {
+  const handleSignUp = async (e: React.FormEvent<HTMLFormElement>, userType: "client" | "freelancer") => {
+    e.preventDefault()
     setIsLoading(true)
 
-    // Simulate registration
-    setTimeout(() => {
-      setIsLoading(false)
+    try {
+      const form = new FormData(e.currentTarget)
+      const payload =
+        userType === "client"
+          ? {
+              firstName: String(form.get("client-first-name") || ""),
+              lastName: String(form.get("client-last-name") || ""),
+              email: String(form.get("client-email") || ""),
+              password: String(form.get("client-password") || ""),
+              company: String(form.get("client-company") || ""),
+              role: "client" as const,
+            }
+          : {
+              firstName: String(form.get("freelancer-first-name") || ""),
+              lastName: String(form.get("freelancer-last-name") || ""),
+              email: String(form.get("freelancer-email") || ""),
+              password: String(form.get("freelancer-password") || ""),
+              skills: String(form.get("freelancer-skills") || ""),
+              role: "freelancer" as const,
+            }
+
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+
+      const data = await res.json()
+      if (!res.ok) throw new Error(data?.error || "Failed to sign up")
+
       toast({
         title: "Account created successfully",
         description: `Welcome to FreelanceHub as a ${userType}.`,
       })
 
-      // Redirect to the appropriate dashboard
       router.push(`/${userType}/dashboard`)
-    }, 1500)
+    } catch (err: any) {
+      toast({
+        title: "Sign up failed",
+        description: err.message || "Please check your details and try again.",
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -50,33 +84,30 @@ export default function SignUpPage() {
 
             <TabsContent value="client">
               <form
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  handleSignUp("client")
-                }}
+                onSubmit={(e) => handleSignUp(e, "client")}
               >
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="client-first-name">First name</Label>
-                      <Input id="client-first-name" required />
+                      <Input id="client-first-name" name="client-first-name" required />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="client-last-name">Last name</Label>
-                      <Input id="client-last-name" required />
+                      <Input id="client-last-name" name="client-last-name" required />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="client-email">Email</Label>
-                    <Input id="client-email" type="email" placeholder="john@example.com" required />
+                    <Input id="client-email" name="client-email" type="email" placeholder="john@example.com" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="client-company">Company (optional)</Label>
-                    <Input id="client-company" />
+                    <Input id="client-company" name="client-company" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="client-password">Password</Label>
-                    <Input id="client-password" type="password" required />
+                    <Input id="client-password" name="client-password" type="password" required />
                   </div>
                   <div className="flex items-center space-x-2">
                     <Checkbox id="client-terms" required />
@@ -103,33 +134,30 @@ export default function SignUpPage() {
 
             <TabsContent value="freelancer">
               <form
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  handleSignUp("freelancer")
-                }}
+                onSubmit={(e) => handleSignUp(e, "freelancer")}
               >
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="freelancer-first-name">First name</Label>
-                      <Input id="freelancer-first-name" required />
+                      <Input id="freelancer-first-name" name="freelancer-first-name" required />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="freelancer-last-name">Last name</Label>
-                      <Input id="freelancer-last-name" required />
+                      <Input id="freelancer-last-name" name="freelancer-last-name" required />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="freelancer-email">Email</Label>
-                    <Input id="freelancer-email" type="email" placeholder="jane@example.com" required />
+                    <Input id="freelancer-email" name="freelancer-email" type="email" placeholder="jane@example.com" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="freelancer-skills">Skills</Label>
-                    <Input id="freelancer-skills" placeholder="e.g., Web Development, MERN Stack, UI/UX" required />
+                    <Input id="freelancer-skills" name="freelancer-skills" placeholder="e.g., Web Development, MERN Stack, UI/UX" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="freelancer-password">Password</Label>
-                    <Input id="freelancer-password" type="password" required />
+                    <Input id="freelancer-password" name="freelancer-password" type="password" required />
                   </div>
                   <div className="flex items-center space-x-2">
                     <Checkbox id="freelancer-terms" required />

@@ -290,8 +290,6 @@ export default function ClientDashboard() {
   ]
 
   return (
-    <div className = "ml-30">
-
     <DashboardSidebar userType="client">
       <div className="space-y-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
@@ -627,6 +625,5 @@ export default function ClientDashboard() {
         </div>
       </div>
     </DashboardSidebar>
-    </div>
   )
 }
