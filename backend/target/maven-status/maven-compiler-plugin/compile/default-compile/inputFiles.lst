@@ -1,0 +1,16 @@
+C:\Users\siddh\Documents\GitHub\karo_freelance\backend\src\main\java\com\karo\config\JwtConfig.java
+C:\Users\siddh\Documents\GitHub\karo_freelance\backend\src\main\java\com\karo\common\GlobalExceptionHandler.java
+C:\Users\siddh\Documents\GitHub\karo_freelance\backend\src\main\java\com\karo\auth\AuthController.java
+C:\Users\siddh\Documents\GitHub\karo_freelance\backend\src\main\java\com\karo\config\SecurityConfig.java
+C:\Users\siddh\Documents\GitHub\karo_freelance\backend\src\main\java\com\karo\user\UserService.java
+C:\Users\siddh\Documents\GitHub\karo_freelance\backend\src\main\java\com\karo\KaroApplication.java
+C:\Users\siddh\Documents\GitHub\karo_freelance\backend\src\main\java\com\karo\user\User.java
+C:\Users\siddh\Documents\GitHub\karo_freelance\backend\src\main\java\com\karo\auth\JwtService.java
+C:\Users\siddh\Documents\GitHub\karo_freelance\backend\src\main\java\com\karo\auth\dto\LoginRequest.java
+C:\Users\siddh\Documents\GitHub\karo_freelance\backend\src\main\java\com\karo\auth\AuthService.java
+C:\Users\siddh\Documents\GitHub\karo_freelance\backend\src\main\java\com\karo\common\ApiResponse.java
+C:\Users\siddh\Documents\GitHub\karo_freelance\backend\src\main\java\com\karo\user\UserRepository.java
+C:\Users\siddh\Documents\GitHub\karo_freelance\backend\src\main\java\com\karo\auth\dto\AuthResponse.java
+C:\Users\siddh\Documents\GitHub\karo_freelance\backend\src\main\java\com\karo\config\CorsConfig.java
+C:\Users\siddh\Documents\GitHub\karo_freelance\backend\src\main\java\com\karo\auth\dto\RegisterRequest.java
+C:\Users\siddh\Documents\GitHub\karo_freelance\backend\src\main\java\com\karo\user\UserRole.java
