@@ -101,18 +101,18 @@ export const RegisterPage = () => {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
-        <div className="w-full max-w-md bg-gray-900 border border-white/10 rounded-2xl p-10 text-center">
+      <div className="min-h-screen bg-black flex items-center justify-center p-4">
+        <div className="w-full max-w-md bg-zinc-950 border border-white/5 rounded-2xl p-10 text-center">
           <div className="text-5xl mb-4">✅</div>
           <h2 className="text-white text-xl font-bold mb-2">Account created!</h2>
-          <p className="text-slate-400 text-sm mb-6">
+          <p className="text-gray-400 text-sm mb-6">
             {role === 'STUDENT'
               ? 'Check your college email to verify your account.'
               : 'Your startup account is under review. We&apos;ll notify you within 24 hours.'}
           </p>
           <button
             onClick={() => navigate('/login')}
-            className="w-full py-3 bg-green-500 text-green-950 font-bold rounded-xl hover:bg-green-400 transition-colors"
+            className="w-full py-3.5 bg-red-600 text-white font-bold rounded-xl hover:bg-red-500 transition-colors shadow-[0_0_20px_rgba(220,38,38,0.3)]"
           >
             Go to Login
           </button>
@@ -123,19 +123,27 @@ export const RegisterPage = () => {
 
   return (
     <div
-      className="min-h-screen bg-slate-950 flex items-center justify-center p-4"
+      className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden my-10"
       style={{
         backgroundImage:
-          'radial-gradient(circle at 20% 50%, rgba(34,197,94,.07) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(99,102,241,.05) 0%, transparent 40%)',
+          'radial-gradient(circle at 20% 50%, rgba(220,38,38,.05) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(220,38,38,.03) 0%, transparent 40%)',
       }}
     >
-      <div className="w-full max-w-lg bg-gray-900 border border-white/8 rounded-2xl p-8 shadow-2xl">
+      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div className="relative w-full max-w-lg bg-zinc-950/80 backdrop-blur-xl border border-white/5 rounded-2xl p-8 shadow-2xl">
 
         {/* Logo */}
-        <h1 className="font-bold text-2xl text-green-400 tracking-tight mb-1" style={{ fontFamily: 'Syne, sans-serif' }}>
-          karo.
-        </h1>
-        <p className="text-slate-500 text-sm mb-6">Create your account</p>
+        <div 
+            className="cursor-pointer inline-block mb-1" 
+            onClick={() => navigate('/')}
+        >
+            <h1 className="font-display text-3xl font-black tracking-tight" style={{ fontFamily: 'Syne, sans-serif' }}>
+                <span className="text-white">karo</span>
+                <span className="text-red-500">freelance.</span>
+            </h1>
+        </div>
+        <p className="text-gray-500 text-sm mb-6">Create your account</p>
 
         {/* Role toggle */}
         <div className="flex gap-3 mb-6">
@@ -144,8 +152,8 @@ export const RegisterPage = () => {
             onClick={() => setRole('STUDENT')}
             className={`flex-1 py-3 rounded-xl border text-sm font-semibold transition-all flex flex-col items-center gap-1
               ${role === 'STUDENT'
-                ? 'border-green-500 bg-green-500/10 text-green-400'
-                : 'border-white/10 text-slate-500 hover:border-white/20 hover:text-slate-400'}`}
+                ? 'border-red-500 bg-red-500/10 text-red-500 shadow-[0_0_15px_rgba(220,38,38,0.2)]'
+                : 'border-white/5 text-gray-500 hover:border-white/10 hover:text-gray-300'}`}
           >
             <span className="text-lg">🎓</span>
             Student
@@ -155,8 +163,8 @@ export const RegisterPage = () => {
             onClick={() => setRole('CLIENT')}
             className={`flex-1 py-3 rounded-xl border text-sm font-semibold transition-all flex flex-col items-center gap-1
               ${role === 'CLIENT'
-                ? 'border-indigo-500 bg-indigo-500/10 text-indigo-400'
-                : 'border-white/10 text-slate-500 hover:border-white/20 hover:text-slate-400'}`}
+                ? 'border-red-500 bg-red-500/10 text-red-500 shadow-[0_0_15px_rgba(220,38,38,0.2)]'
+                : 'border-white/5 text-gray-500 hover:border-white/10 hover:text-gray-300'}`}
           >
             <span className="text-lg">🚀</span>
             Startup / Client
@@ -193,7 +201,7 @@ export const RegisterPage = () => {
               <Field label="College" error={sErrors.collegeName?.message}>
                 <select
                   {...studentForm.register('collegeName')}
-                  className="w-full bg-slate-800 border border-white/8 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors appearance-none"
+                  className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-gray-200 text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all appearance-none font-sans"
                 >
                   <option value="">Select college</option>
                   {COLLEGES.map(c => <option key={c} value={c}>{c}</option>)}
@@ -202,7 +210,7 @@ export const RegisterPage = () => {
               <Field label="Year of study" error={sErrors.yearOfStudy?.message}>
                 <select
                   {...studentForm.register('yearOfStudy')}
-                  className="w-full bg-slate-800 border border-white/8 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors appearance-none"
+                  className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-gray-200 text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all appearance-none font-sans"
                 >
                   <option value="">Select year</option>
                   {YEARS.map(y => <option key={y} value={y}>{y}</option>)}
@@ -225,7 +233,9 @@ export const RegisterPage = () => {
 
             <PasswordHint />
 
-            <SubmitBtn color="green" label="Create student account →" />
+            <div className="pt-2">
+                <SubmitBtn label="Create student account →" />
+            </div>
           </form>
         )}
 
@@ -271,19 +281,21 @@ export const RegisterPage = () => {
 
             <PasswordHint />
 
-            <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-3 text-indigo-300 text-xs">
+            <div className="bg-zinc-900 border border-white/5 rounded-xl p-3 text-gray-400 text-xs">
               Startup accounts are manually verified by the Karo team before activation. Usually within 24 hours.
             </div>
 
-            <SubmitBtn color="indigo" label="Create startup account →" />
+            <div className="pt-2">
+                <SubmitBtn label="Create startup account →" />
+            </div>
           </form>
         )}
 
-        <p className="text-center text-slate-500 text-sm mt-5">
+        <p className="text-center text-gray-500 text-sm mt-8">
           Already have an account?{' '}
           <span
             onClick={() => navigate('/login')}
-            className="text-green-400 font-medium cursor-pointer hover:text-green-300"
+            className="text-red-500 font-semibold cursor-pointer hover:text-red-400 transition-colors"
           >
             Sign in
           </span>
@@ -308,11 +320,11 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-slate-400 text-xs font-medium uppercase tracking-wider mb-1.5">
+      <label className="block text-gray-400 text-xs font-medium uppercase tracking-wider mb-1.5">
         {label}
       </label>
       {children}
-      {hint && !error && <p className="text-slate-600 text-xs mt-1">{hint}</p>}
+      {hint && !error && <p className="text-gray-600 text-xs mt-1">{hint}</p>}
       {error && <p className="text-red-400 text-xs mt-1">{error}</p>}
     </div>
   )
@@ -320,28 +332,24 @@ function Field({
 
 const Input = ({ className = '', ...props }: React.InputHTMLAttributes<HTMLInputElement>) => (
   <input
-    className={`w-full bg-slate-800 border border-white/8 rounded-xl px-4 py-3
-      text-slate-200 text-sm placeholder:text-slate-600
-      focus:outline-none focus:border-green-500 transition-colors ${className}`}
+    className={`w-full bg-black border border-white/10 rounded-xl px-4 py-3
+      text-gray-200 text-sm placeholder:text-gray-600
+      focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all font-sans ${className}`}
     {...props}
   />
 )
 
 const PasswordHint = () => (
-  <p className="text-slate-600 text-xs -mt-2">
+  <p className="text-gray-600 text-xs mt-1">
     Password must be at least 8 characters, include an uppercase letter and a number.
   </p>
 )
 
-const SubmitBtn = ({ color, label }: { color: 'green' | 'indigo'; label: string }) => {
-  const cls =
-    color === 'green'
-      ? 'bg-green-500 hover:bg-green-400 text-green-950 hover:shadow-green-500/20'
-      : 'bg-indigo-500 hover:bg-indigo-400 text-white hover:shadow-indigo-500/20'
+const SubmitBtn = ({ label }: { label: string }) => {
   return (
     <button
       type="submit"
-      className={`w-full py-3 font-bold rounded-xl transition-all hover:shadow-lg hover:-translate-y-0.5 ${cls}`}
+      className="w-full py-3.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-xl transition-all hover:shadow-[0_0_20px_rgba(220,38,38,0.4)]"
       style={{ fontFamily: 'Syne, sans-serif' }}
     >
       {label}
